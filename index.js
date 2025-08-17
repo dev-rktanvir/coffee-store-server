@@ -28,6 +28,11 @@ async function run() {
         // Collections
         const coffeeCollections = client.db("coffee-store").collection("coffees");
 
+        // Api for get coffee
+        app.get('/coffees', async (req, res) => {
+            const result = await coffeeCollections.find().toArray();
+            res.send(result);
+        })
         // Api for add coffee
         app.post('/coffees', async (req, res) => {
             const newCoffee = req.body;
