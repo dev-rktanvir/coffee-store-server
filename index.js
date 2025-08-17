@@ -46,6 +46,18 @@ async function run() {
             const result = await coffeeCollections.insertOne(newCoffee);
             res.send(result);
         })
+        // Api for update coffee
+        app.put('/coffees/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = {_id: new ObjectId(id)}
+            const option = {upsert: true};
+            const coffeeData = req.body;
+            const updateCoffee = {$set: coffeeData}
+            
+
+            const result = await coffeeCollections.updateOne(filter, updateCoffee, option)
+            res.send(result);
+        })
 
 
         // Send a ping to confirm a successful connection
