@@ -58,6 +58,13 @@ async function run() {
             const result = await coffeeCollections.updateOne(filter, updateCoffee, option)
             res.send(result);
         })
+        // Api for delete coffee
+        app.delete('/coffees/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = {_id: new ObjectId(id)}
+            const result = await coffeeCollections.deleteOne(filter)
+            res.send(result);
+        })
 
 
         // Send a ping to confirm a successful connection
